@@ -19,7 +19,7 @@ var CategoryListItem = React.createClass({
 var TaskListItem = React.createClass({
     render: function() {
         return (
-            <li data-status={this.props.item.get('status')} data-id={this.props.item.get('id')}>{this.props.item.get('name')}</li>
+            <li data-status={this.props.item.get('status')}><a href="#" data-id={this.props.item.get('id')}>{this.props.item.get('name')}</a></li>
         );
     }
 });
