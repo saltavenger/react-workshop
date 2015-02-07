@@ -20,7 +20,7 @@ var CategoryForm = React.createClass({
 
     render: function() {
         return (
-            <form role="form" className="js-categoryForm" id="categoryForm" onSubmit={this.handleSubmit}>
+            <form role="form" className="categoryForm" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label>Category</label>
                     <input type="text" className="form-control" ref="category" />

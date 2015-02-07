@@ -1,4 +1,22 @@
-var Task = React.createClass({
+var CategoryListItem = React.createClass({
+    render: function() {
+        var taskList = this.props.tasks.map(function(task, i) {
+            return (
+                <TaskListItem key={i} item={task} />
+            );
+        }.bind(this));
+
+        return (
+            <li>{this.props.item.get('name')}
+                <ul data-category="{this.props.item.get('id')}">
+                    {taskList}
+                </ul>
+            </li>
+        );
+    }
+});
+
+var TaskListItem = React.createClass({
     render: function() {
         return (
             <li data-status={this.props.item.get('status')} data-id={this.props.item.get('id')}>{this.props.item.get('name')}</li>
@@ -8,39 +26,44 @@ var Task = React.createClass({
 
 var TaskList = React.createClass({
     getInitialState: function() {
-        return { tasks: [] };
+        return { categories: [], tasks: [] };
     },
 
     componentDidMount: function() {
-        this.props.collection.on('sync remove', function() {
-            this.setState({tasks: this.props.collection});
+        this.props.categoryCollection.on('sync remove', function() {
+            this.setState({categories: this.props.categoryCollection});
+        }.bind(this));
+
+        this.props.taskCollection.on('sync remove', function() {
+            this.setState({tasks: this.props.taskCollection});
         }.bind(this));
     },
 
     completeTask: function(e) {
         e.preventDefault();
 
-        var task = this.props.collection.get(event.target.getAttribute('data-id'));
+        var task = this.props.taskCollection.get(event.target.getAttribute('data-id'));
 
-        if (task.get('status') === 0) {
-            task.set('status', 2);
-        } else {
-            task.set('status', 0);    
-        }
-
-        task.save();
+        task.toggleStatus();
     },
 
     render: function() {
-        var taskList = this.state.tasks.map(function(task, i) {
+        var categoryList = this.state.categories.map(function(category, i) {
+            var tasks = [];
+
+            if (this.state.tasks.length) {
+                tasks = this.state.tasks.where({category: category.get('id')});
+
+            }
+            
             return (
-                <Task key={i} item={task} />
+                <CategoryListItem key={i} item={category} tasks={tasks} />
             );
-        });
+        }.bind(this));
 
         return (
             <ul className="taskList" onClick={this.completeTask}>
-                {taskList}
+                {categoryList}
             </ul>
         );
     }

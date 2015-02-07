@@ -3,6 +3,8 @@ import Navbar from './Navbar.react';
 import CategoryForm from './CategoryForm.react';
 import TaskForm from './TaskForm.react';
 import TaskList from './TaskList.react';
+import RemoveCompletedTasksButton from './RemoveCompletedTasksButton.react';
+
 // collections
 import CategoryCollection from '../domain/CategoryCollection';
 import TaskCollection from '../domain/TaskCollection';
@@ -24,11 +26,15 @@ var App = React.createClass({
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
-                            <CategoryForm collection={categoryCollection} />
-                            <TaskForm categoryCollection={categoryCollection} taskCollection={taskCollection} />
+                            <TaskList categoryCollection={categoryCollection} taskCollection={taskCollection} />
                         </div>
                         <div className="col-md-6">
-                            <TaskList collection={taskCollection} />
+                            <CategoryForm collection={categoryCollection} />
+                            <TaskForm categoryCollection={categoryCollection} taskCollection={taskCollection} />
+
+                            <hr/>
+
+                            <RemoveCompletedTasksButton collection={taskCollection} />
                         </div>
                     </div>
                 </div>

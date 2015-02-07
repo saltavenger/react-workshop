@@ -13,7 +13,7 @@ var TaskForm = React.createClass({
 
         this.props.taskCollection.create({
             name: task,
-            category: category
+            category: parseInt(category)
         });
 
         this.refs.task.getDOMNode().value = '';
@@ -29,7 +29,7 @@ var TaskForm = React.createClass({
 
     render: function() {
         return (
-            <form role="form" className="js-taskForm" id="taskForm" onSubmit={this.handleSubmit}>
+            <form role="form" className="taskForm" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label>Task</label>
                     <input type="text" className="form-control" ref="task" />
@@ -41,8 +41,6 @@ var TaskForm = React.createClass({
                 </div>
         
                 <p><button type="submit" className="btn btn-primary">Add Task</button></p>
-                
-                <p><button type="button" className="btn btn-default" onClick={this.removeCompleted}>Remove Completed</button></p>
             </form>
         );
     }
