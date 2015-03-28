@@ -9,15 +9,32 @@ import RemoveCompletedTasksButton from './RemoveCompletedTasksButton.react';
 import CategoryCollection from '../domain/CategoryCollection';
 import TaskCollection from '../domain/TaskCollection';
 
-// fetch categories
-var categoryCollection = new CategoryCollection();
-categoryCollection.fetch();
-
-// fetch tasks
-var taskCollection = new TaskCollection();
-taskCollection.fetch();
-
 var App = React.createClass({
+    getInitialState: function() {
+        return {
+            categories: new CategoryCollection(),
+            tasks: new TaskCollection()
+        }
+    },
+
+    componentDidMount: function() {
+        this.state.categories.fetch();
+        this.state.tasks.fetch();
+
+        this.state.categories.on('all', () => {
+            this.setState({categories: this.state.categories});
+        });
+
+        this.state.tasks.on('all', () => {
+            this.setState({tasks: this.state.tasks});
+        });
+    },
+
+    componentWillUnmount: function() {
+        this.state.categories.off('all');
+        this.state.tasks.off('all');
+    },
+
     render: function() {
         return (
             <section>
@@ -26,15 +43,15 @@ var App = React.createClass({
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
-                            <TaskList categoryCollection={categoryCollection} taskCollection={taskCollection} />
+                            <TaskList categories={this.state.categories} tasks={this.state.tasks} />
                         </div>
                         <div className="col-md-6">
-                            <CategoryForm collection={categoryCollection} />
-                            <TaskForm categoryCollection={categoryCollection} taskCollection={taskCollection} />
+                            <CategoryForm categories={this.state.categories} />
+                            <TaskForm categories={this.state.categories} tasks={this.state.tasks} />
 
                             <hr/>
 
-                            <RemoveCompletedTasksButton collection={taskCollection} />
+                            <RemoveCompletedTasksButton tasks={this.state.tasks} />
                         </div>
                     </div>
                 </div>

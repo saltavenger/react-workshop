@@ -11,7 +11,7 @@ var TaskForm = React.createClass({
             return;
         }
 
-        this.props.taskCollection.create({
+        this.props.tasks.create({
             name: task,
             category: parseInt(category)
         });
@@ -22,7 +22,7 @@ var TaskForm = React.createClass({
     removeCompleted: function(e) {
         e.preventDefault();
 
-        this.props.taskCollection.where({status: 2}).forEach(function(task) {
+        this.props.tasks.where({status: 2}).forEach(function(task) {
             task.destroy();
         });
     },
@@ -37,7 +37,7 @@ var TaskForm = React.createClass({
         
                 <div className="form-group">
                     <label>Category</label>
-                    <CategorySelect collection={this.props.categoryCollection} ref="category" />
+                    <CategorySelect categories={this.props.categories} ref="category" />
                 </div>
         
                 <p><button type="submit" className="btn btn-primary">Add Task</button></p>

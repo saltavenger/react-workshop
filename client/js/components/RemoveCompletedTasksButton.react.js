@@ -2,7 +2,7 @@ var RemoveCompletedTasksButton = React.createClass({
     handleClick: function(e) {
         e.preventDefault();
 
-        this.props.collection.removeCompleted();
+        this.props.tasks.removeCompleted();
     },
 
     render: function() {

@@ -7,20 +7,8 @@ var CategorySelectOption = React.createClass({
 });
 
 var CategorySelect = React.createClass({
-    getInitialState: function() {
-        return {
-            categories: []
-        };
-    },
-
-    componentDidMount: function() {
-        this.props.collection.on('sync', function() {
-            this.setState({categories: this.props.collection});
-        }.bind(this));
-    },
-
     render: function() {
-        var options = this.state.categories.map(function(item, i) {
+        var options = this.props.categories.map(function(item, i) {
             return (
                 <CategorySelectOption item={item} key={i}/>
             );

@@ -10,7 +10,7 @@ var CategoryForm = React.createClass({
         }
 
         // save to server
-        this.props.collection.create({
+        this.props.categories.create({
             name: category
         });
 
