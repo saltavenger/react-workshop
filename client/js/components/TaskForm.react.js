@@ -19,14 +19,6 @@ var TaskForm = React.createClass({
         this.refs.task.getDOMNode().value = '';
     },
 
-    removeCompleted: function(e) {
-        e.preventDefault();
-
-        this.props.tasks.where({status: 2}).forEach(function(task) {
-            task.destroy();
-        });
-    },
-
     render: function() {
         return (
             <form role="form" className="taskForm" onSubmit={this.handleSubmit}>
