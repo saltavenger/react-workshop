@@ -10,6 +10,7 @@ import CategoryCollection from '../domain/CategoryCollection';
 import TaskCollection from '../domain/TaskCollection';
 
 var App = React.createClass({
+    // initial state
     getInitialState: function() {
         return {
             categories: new CategoryCollection(),
@@ -17,6 +18,7 @@ var App = React.createClass({
         }
     },
 
+    // lifecycle hooks
     componentDidMount: function() {
         this.state.categories.fetch();
         this.state.tasks.fetch();
@@ -35,6 +37,11 @@ var App = React.createClass({
         this.state.tasks.off('all');
     },
 
+    // events
+    removeCompletedTasks: function(val) {
+        this.state.tasks.removeCompleted();
+    },
+
     render: function() {
         return (
             <section>
@@ -45,13 +52,15 @@ var App = React.createClass({
                         <div className="col-md-6">
                             <TaskList categories={this.state.categories} tasks={this.state.tasks} />
                         </div>
+                        
                         <div className="col-md-6">
                             <CategoryForm categories={this.state.categories} />
+                            
                             <TaskForm categories={this.state.categories} tasks={this.state.tasks} />
 
                             <hr/>
 
-                            <RemoveCompletedTasksButton tasks={this.state.tasks} />
+                            <RemoveCompletedTasksButton removeCompletedTasks={this.removeCompletedTasks} />
                         </div>
                     </div>
                 </div>
