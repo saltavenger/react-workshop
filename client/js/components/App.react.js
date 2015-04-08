@@ -49,11 +49,11 @@ var App = React.createClass({
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-5">
                             <TaskList categories={this.state.categories} tasks={this.state.tasks} />
                         </div>
                         
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-md-offset-1">
                             <CategoryForm categories={this.state.categories} />
                             
                             <TaskForm categories={this.state.categories} tasks={this.state.tasks} />

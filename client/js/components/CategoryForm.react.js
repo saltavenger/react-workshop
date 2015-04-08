@@ -21,12 +21,14 @@ var CategoryForm = React.createClass({
     render: function() {
         return (
             <form role="form" className="categoryForm" onSubmit={this.handleSubmit}>
+                <h3>Create Category</h3>
+
                 <div className="form-group">
-                    <label>Category</label>
+                    <label>Name</label>
                     <input type="text" className="form-control" ref="category" />
                 </div>
         
-                <button type="submit" className="btn btn-primary">Add Category</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }

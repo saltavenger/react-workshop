@@ -22,8 +22,10 @@ var TaskForm = React.createClass({
     render: function() {
         return (
             <form role="form" className="taskForm" onSubmit={this.handleSubmit}>
+                <h3>Create Task</h3>
+
                 <div className="form-group">
-                    <label>Task</label>
+                    <label>Name</label>
                     <input type="text" className="form-control" ref="task" />
                 </div>
         
@@ -32,7 +34,7 @@ var TaskForm = React.createClass({
                     <CategorySelect categories={this.props.categories} ref="category" />
                 </div>
         
-                <p><button type="submit" className="btn btn-primary">Add Task</button></p>
+                <p><button type="submit" className="btn btn-primary">Submit</button></p>
             </form>
         );
     }
