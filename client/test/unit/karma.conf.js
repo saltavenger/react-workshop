@@ -64,7 +64,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
@@ -79,6 +79,13 @@ module.exports = function(config) {
         'karma-jasmine',
         'karma-spec-reporter',
         'karma-browserify'
-    ]
+    ],
+
+    // browserify config
+    browserify: {
+        transform: [
+            ['reactify']
+        ]
+    }
   });
 };
