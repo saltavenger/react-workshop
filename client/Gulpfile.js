@@ -10,22 +10,20 @@ gulp.task('babel', function () {
             console.log(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('babelified'));
 });
 
 gulp.task('browserify', ['babel'], function() {
-    return gulp.src('dist/app.js')
+    return gulp.src('babelified/app.js')
         .pipe(browserify())
         .on('error', function(err) {
             console.log(err.message);
             this.emit('end');
         })
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('browserified'));
 });
 
-gulp.task('default', ['browserify'], function() {
-    del(['dist/components', 'dist/domain']);
-});
+gulp.task('default', ['browserify']);
 
 gulp.task('watch', function() {
     gulp.watch('js/**/*.js', ['default']);
