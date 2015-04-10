@@ -1,5 +1,12 @@
 .DS_Store
+<<<<<<< HEAD
 dist
 node_modules
 bower_components
 *.log
+=======
+node_modules
+bower_components
+babelified
+browserified
+>>>>>>> upstream/master
